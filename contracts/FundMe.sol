@@ -12,7 +12,6 @@ contract FundMe is ERC721, ReentrancyGuard {
 
     using SafeMathChainlink for uint256;
 
-    // address[] public funders;
     address public owner;
 
     mapping(address => uint256) public fundeeValid;
@@ -70,7 +69,7 @@ contract FundMe is ERC721, ReentrancyGuard {
         return ethAmountInUsd;
     }
 
-    function withdraw() payable onlyOwner public {
+    function withdraw() payable public {
         require(fundInfo[msg.sender].amount_received > 0, "!zero");
         msg.sender.transfer(fundInfo[msg.sender].amount_received);
         resetFund(msg.sender);
